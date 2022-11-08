@@ -1,0 +1,25 @@
+{
+  "name": "webworker-demo",
+  "version": "1.0.0",
+  "description": "webworker demo",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HHH1994/webworker-demo.git"
+  },
+  "keywords": [
+    "web",
+    "worker"
+  ],
+  "author": "HHH",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HHH1994/webworker-demo/issues"
+  },
+  "homepage": "https://github.com/HHH1994/webworker-demo#readme",
+  "dependencies": {
+    "koa": "^2.13.4",
+    "koa-log4": "^2.3.2",
+    "koa-static": "^5.0.0"
+  }
+}

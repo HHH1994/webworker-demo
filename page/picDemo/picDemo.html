@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片webworker预加载 Demo</title>
+</head>
+
+<body>
+    <p>图片webworker预加载 Demo</p>
+    <p>
+        <span>当前时间:</span>
+        <span id="curTime"></span>
+    </p>
+    <button id="leakBtn" onclick="createLeak()"></button>
+    <button id="clear" onclick="clearLeak()"></button>
+    <a id="back" href="/picDemo/picDemo.html">1231231</a>
+</body>
+<script>
+    if (Worker) {
+        let worker = new Worker('./worker.js');
+
+        worker.onmessage = (e) => {
+            console.log(e)
+            document.querySelector('#curTime').innerHTML = e.data;
+        }
+
+        worker.postMessage(123)
+
+        let errorHandler = function (error) {
+            console.error(error)
+        }
+
+        worker.addEventListener('error', errorHandler)
+
+        window.onbeforeunload = function () {
+            worker.terminate();
+            worker.removeEventListener('error', errorHandler)
+        }
+    }
+
+    function createLeak() {
+        window.leakArrays = []
+        for (let i = 0; i < 100; i++) {
+            window.leakArrays.push(document.createElement('div'));
+        }
+    }
+
+    function clearLeak() {
+        window.leakArrays = []
+    }
+
+
+</script>
+
+</html>
